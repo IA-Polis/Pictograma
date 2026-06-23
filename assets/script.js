@@ -22,7 +22,7 @@ async function loadPictograms() {
             pictograms = window.PICTOGRAMS_DATA;
         } else {
             // Tenta carregar via fetch
-            const response = await fetch('fonte.json');
+            const response = await fetch('assets/fonte.json');
 
             if (!response.ok) {
                 throw new Error(`Erro ao carregar fonte.json: ${response.status}`);
