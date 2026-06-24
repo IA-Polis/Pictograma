@@ -1,6 +1,7 @@
 [
   {
     "imagem": "alim_agua.png",
-    "referente": "Ingerir com água"
+    "referente": "Ingerir com água",
+    "tipo": "Pictograma"
   }
 ]

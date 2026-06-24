@@ -19,6 +19,12 @@
 
     <main>
         <div class="container">
+            <div class="filter-bar">
+                <label for="typeFilter">Filtrar por tipo:</label>
+                <select id="typeFilter">
+                    <option value="">Todos</option>
+                </select>
+            </div>
             <div class="pictogram-list" id="pictogramList">
                 <div class="loading">Carregando pictogramas...</div>
             </div>
@@ -34,6 +40,18 @@
         </div>
     </footer>
 
+    <div id="consentPopup" class="consent-popup" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+        <div class="consent-popup__content">
+            <h2 id="consentTitle">Uso Não Comercial</h2>
+            <p>Este material é fornecido sob a licença Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0). O uso comercial não é permitido sem autorização expressa.</p>
+            <p>O conteúdo e as imagens são destinados apenas para fins educativos e de divulgação não comercial, conforme definido no README e no LICENSE deste projeto.</p>
+            <div class="consent-popup__actions">
+                <button id="acceptConsent" class="button button--primary">Aceitar e entrar</button>
+                <button id="declineConsent" class="button button--secondary">Não aceitar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Carrega os dados do fonte.json e os torna disponíveis globalmente
         fetch('assets/fonte.json')
@@ -46,6 +64,33 @@
                 // Fallback: dados vazios
                 window.PICTOGRAMS_DATA = [];
             });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var consentPopup = document.getElementById('consentPopup');
+            var acceptButton = document.getElementById('acceptConsent');
+            var declineButton = document.getElementById('declineConsent');
+            var redirectUrl = 'https://educaesusaps.medicina.ufmg.br';
+
+            function showPopup() {
+                consentPopup.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function hidePopup() {
+                consentPopup.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+
+            acceptButton.addEventListener('click', function () {
+                hidePopup();
+            });
+
+            declineButton.addEventListener('click', function () {
+                window.location.href = redirectUrl;
+            });
+
+            showPopup();
+        });
     </script>
     <script src="assets/script.js"></script>
 </body>

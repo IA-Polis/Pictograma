@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
 /**
  * Carrega os pictogramas do arquivo fonte.json
  */
+let allPictograms = [];
+
 async function loadPictograms() {
     const pictogramList = document.getElementById('pictogramList');
 
@@ -37,14 +39,9 @@ async function loadPictograms() {
             return;
         }
 
-        // Limpa o conteúdo
-        pictogramList.innerHTML = '';
-
-        // Cria elementos para cada pictograma
-        pictograms.forEach((item, index) => {
-            const pictogramElement = createPictogramElement(item, index);
-            pictogramList.appendChild(pictogramElement);
-        });
+        allPictograms = pictograms;
+        initTypeFilter(pictograms);
+        renderPictograms(pictograms);
 
     } catch (error) {
         console.error('Erro ao carregar pictogramas:', error);
@@ -55,6 +52,50 @@ async function loadPictograms() {
             </div>
         `;
     }
+}
+
+function initTypeFilter(pictograms) {
+    const typeFilter = document.getElementById('typeFilter');
+
+    if (!typeFilter) {
+        return;
+    }
+
+    const tipos = Array.from(new Set(
+        pictograms
+            .map(item => (item.tipo || item.type || 'Sem tipo').toString().trim())
+            .filter(Boolean)
+    ));
+
+    tipos.sort((a, b) => a.localeCompare(b, 'pt-BR', { sensitivity: 'base' }));
+
+    typeFilter.innerHTML = '<option value="">Todos</option>';
+
+    tipos.forEach(tipo => {
+        const option = document.createElement('option');
+        option.value = tipo;
+        option.textContent = tipo;
+        typeFilter.appendChild(option);
+    });
+
+    typeFilter.addEventListener('change', () => {
+        const selectedType = typeFilter.value;
+        const filtered = selectedType
+            ? allPictograms.filter(item => (item.tipo || item.type || '').toString().trim() === selectedType)
+            : allPictograms;
+
+        renderPictograms(filtered);
+    });
+}
+
+function renderPictograms(pictograms) {
+    const pictogramList = document.getElementById('pictogramList');
+    pictogramList.innerHTML = '';
+
+    pictograms.forEach((item, index) => {
+        const pictogramElement = createPictogramElement(item, index);
+        pictogramList.appendChild(pictogramElement);
+    });
 }
 
 /**
@@ -71,6 +112,7 @@ function createPictogramElement(item, index) {
     // Validação básica
     const imageName = item.imagem || 'sem-imagem.png';
     const referente = item.referente || 'Sem descrição';
+    const tipo = (item.tipo || item.type || '').toString().trim();
 
     const imagePath = `imagens/${imageName}`;
 
@@ -85,6 +127,7 @@ function createPictogramElement(item, index) {
         <div class="pictogram-text">
             <h3>Pictograma ${index + 1}</h3>
             <p>${sanitizeHTML(referente)}</p>
+            ${tipo ? `<p class="pictogram-type">Tipo: ${sanitizeHTML(tipo)}</p>` : ''}
         </div>
     `;
 
