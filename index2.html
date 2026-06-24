@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PictoSUS - Versão 1.0</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>PictoSUS</h1>
+            <p class="version">Versão 1.0</p>
+            <p class="license">
+                <span>📋</span> Licença: <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a>
+            </p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="filter-bar">
+                <label for="typeFilter">Filtrar por tipo:</label>
+                <select id="typeFilter">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+            <div class="pictogram-list" id="pictogramList">
+                <div class="loading">Carregando pictogramas...</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Propriedade Intelectual e Direitos Autorais</h3>
+            <p>O Ministério da Saúde conta com a proteção de direitos autorais disposta no Protocolo 2 da Convenção Universal de Direitos Autorais, de forma que todas as publicações em conjunto com a UFMG e parceiros de execução do Projeto são de propriedade intelectual do Ministério da Saúde. Toda publicação, divulgação ou compartilhamento deve possuir prévia anuência formal e material da Secretaria de Atenção Primária à Saúde (SAPS). Para divulgação em mídias, materiais institucionais e promoção midiática é necessário solicitar avaliação e aprovação da ASCOM/MS.</p>
+            <p>Dados de pessoas e profissionais da APS exibidos nos cursos, assim como as histórias clínicas, são simulações produzidas para fins didáticos. As ilustrações utilizadas nos cursos de educação permanente e-SUS APS foram de produção própria, desenvolvidas com a expertise acadêmica dos autores, repositórios de imagens livres ou obtidas através contratação de serviços de design e parceiras acadêmicas. As imagens fotográficas usadas foram as do acervo do Centro de Informática em Saúde da UFMG ou obtidas em repositórios livres ou adquiridas com recursos do projeto.</p>
+            <p class="copyright">&copy; 2026 PictoSUS. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Carrega os dados do fonte.json e os torna disponíveis globalmente
+        fetch('assets/fonte.json')
+            .then(response => response.json())
+            .then(data => {
+                window.PICTOGRAMS_DATA = data;
+            })
+            .catch(error => {
+                console.warn('Não foi possível carregar fonte.json via fetch. Usando fallback.', error);
+                // Fallback: dados vazios
+                window.PICTOGRAMS_DATA = [];
+            });
+    </script>
+    <script src="assets/script.js"></script>
+</body>
+</html>

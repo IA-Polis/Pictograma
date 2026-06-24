@@ -3,6 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PictoSUS - Termos de Uso</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>PictoSUS</h1>
+            <p class="version">Versão 1.0</p>
+            <p class="license">
+                <span>📋</span> Licença: <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a>
+            </p>
+            <p class="project-description">🤖 O projeto IA-Polis usa inteligência artificial para tornar as receitas de medicamentos mais claras e acessíveis.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="terms-card">
+                <h2>Propriedade Intelectual, Direitos Autorais e Termos de Uso e Divulgação</h2>
+
+                <p>O Ministério da Saúde conta com a proteção de direitos autorais disposta no Protocolo 2 da Convenção Universal de Direitos Autorais, de forma que todas as publicações em conjunto com a UFMG e parceiros de execução do Projeto são de propriedade intelectual do Ministério da Saúde. Toda publicação, divulgação ou compartilhamento deve possuir prévia anuência formal e material da Secretaria de Atenção Primária à Saúde (SAPS).</p>
+
+                <p>Além da anuência da SAPS o uso dos pictogramas do PictoSUS deve atender às seguintes condições:</p>
+                <ol>
+                    <li>Os pictogramas PictoSUS não podem ser usados como único meio de transferência de informação para pacientes, dado o potencial de má interpretação.</li>
+                    <li>Os pictogramas PictoSUS não podem ser modificados ou usados junto a pictogramas que não façam parte do conjunto PictoSUS.</li>
+                    <li>O uso dos pictogramas PictoSUS deve ser acompanhado da indicação de autoria UFMG/Ministério da Saúde.</li>
+                    <li>A UFMG e o Ministério da Saúde não assumem responsabilidade por má interpretação ou por efeitos ou resultados adversos resultantes do uso dos pictogramas PictoSUS.</li>
+                </ol>
+
+                <p>A anuência de uso dos pictogramas do PictoSUS pode ser retirada a qualquer tempo caso o Ministério da Saúde, ou a SAPS, entenda que os Pictogramas estão sendo usados de maneira inadequada.</p>
+
+                <p>Para divulgação em mídias, materiais institucionais e promoção midiática é necessário solicitar avaliação e aprovação da ASCOM/MS.</p>
+
+                <p class="terms-note">Clique em <strong>Concordo com os termos de uso e divulgação</strong> para acessar o repositório de pictogramas.</p>
+
+                <div class="terms-actions">
+                    <button id="acceptTerms" class="button button--primary">Concordo com os termos de uso e divulgação</button>
+                    <button id="declineTerms" class="button button--secondary">Não concordo com os termos</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 PictoSUS. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var redirectUrl = 'https://educaesusaps.medicina.ufmg.br';
+            var storageKey = 'pictosusConsentAccepted';
+
+            function hasConsent() {
+                try { return localStorage.getItem(storageKey) === 'true'; } catch (e) { return false; }
+            }
+
+            function setConsent() {
+                try { localStorage.setItem(storageKey, 'true'); } catch (e) { }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var accept = document.getElementById('acceptTerms');
+                var decline = document.getElementById('declineTerms');
+
+                if (hasConsent()) {
+                    window.location.href = 'index2.html';
+                    return;
+                }
+
+                accept.addEventListener('click', function () {
+                    setConsent();
+                    window.location.href = 'index2.html';
+                });
+
+                decline.addEventListener('click', function () {
+                    window.location.href = redirectUrl;
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PictoSUS - Versão 1.0</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
