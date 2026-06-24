@@ -73,6 +73,13 @@ header a:hover {
     opacity: 0.8;
 }
 
+.project-description {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.92);
+}
+
 /* Main */
 main {
     flex: 1;

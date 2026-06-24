@@ -14,6 +14,7 @@
             <p class="license">
                 <span>📋</span> Licença: <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a>
             </p>
+            <p class="project-description">🤖 O projeto IA-Polis usa inteligência artificial para tornar as receitas de medicamentos mais claras e acessíveis.</p>
         </div>
     </header>
 
@@ -70,6 +71,23 @@
             var acceptButton = document.getElementById('acceptConsent');
             var declineButton = document.getElementById('declineConsent');
             var redirectUrl = 'https://educaesusaps.medicina.ufmg.br';
+            var storageKey = 'pictosusConsentAccepted';
+
+            function hasConsent() {
+                try {
+                    return localStorage.getItem(storageKey) === 'true';
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function setConsent() {
+                try {
+                    localStorage.setItem(storageKey, 'true');
+                } catch (e) {
+                    // Se localStorage não estiver disponível, continua sem persistência
+                }
+            }
 
             function showPopup() {
                 consentPopup.style.display = 'flex';
@@ -82,6 +100,7 @@
             }
 
             acceptButton.addEventListener('click', function () {
+                setConsent();
                 hidePopup();
             });
 
@@ -89,7 +108,11 @@
                 window.location.href = redirectUrl;
             });
 
-            showPopup();
+            if (hasConsent()) {
+                hidePopup();
+            } else {
+                showPopup();
+            }
         });
     </script>
     <script src="assets/script.js"></script>
