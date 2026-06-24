@@ -74,6 +74,7 @@
             var storageKey = 'pictosusConsentAccepted';
 
             function hasConsent() {
+                return false; // Desabilita o uso de localStorage para consentimento
                 try {
                     return localStorage.getItem(storageKey) === 'true';
                 } catch (e) {
