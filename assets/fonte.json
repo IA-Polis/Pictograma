@@ -5,8 +5,8 @@
     "tipo": "Pictograma"
   },
     {
-    "imagem": "alim_agua.png",
-    "referente": "TESTE Ingerir com água",
+    "imagem": "sequencia.png",
+    "referente": "Via otológica gotas",
     "tipo": "Sequencia Pictórica de Procedimentos"
     
   }
