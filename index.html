@@ -64,11 +64,12 @@
                 var storageKey = 'pictosusConsentAccepted';
 
                 function hasConsent() {
+                    return false;
                     try { return localStorage.getItem(storageKey) === 'true'; } catch (e) { return false; }
                 }
 
                 function setConsent() {
-                    try { localStorage.setItem(storageKey, 'true'); } catch (e) { }
+                    //try { localStorage.setItem(storageKey, 'true'); } catch (e) { }
                 }
 
                 document.addEventListener('DOMContentLoaded', function () {
